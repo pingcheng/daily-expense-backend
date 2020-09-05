@@ -3,17 +3,29 @@
 namespace App;
 
 use App\Models\Model;
+use App\Models\Record\Category;
+use App\Models\Record\Record;
+use App\Models\Record\SubCategory;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
 
+/**
+ * Class User
+ * @package App
+ *
+ * @property Collection|Record[] $records
+ * @property Collection|Record[] $recordSubCategories
+ */
 class User extends Model implements AuthenticatableContract,
 	AuthorizableContract,
 	CanResetPasswordContract
@@ -77,5 +89,19 @@ class User extends Model implements AuthenticatableContract,
 	public function getAvatar(): string {
     	$name = str_replace(' ', '+', $this->getName());
     	return "https://ui-avatars.com/api/?name={$name}";
+	}
+
+	public function records(): HasMany {
+    	return $this->hasMany(Record::class, 'user_id', 'id')
+			->orderByDesc('datetime');
+	}
+
+	public function recordSubCategories(): HasMany
+	{
+    	return $this->hasMany(SubCategory::class, 'user_id', 'id');
+	}
+
+	public function recordCategories(): HasMany {
+    	return $this->hasMany(Category::class, 'user_id', 'id');
 	}
 }

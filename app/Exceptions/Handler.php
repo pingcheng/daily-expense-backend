@@ -84,6 +84,6 @@ class Handler extends ExceptionHandler
 				return JsonResponse::toResponse(new ApiResponse(401, $exception->getMessage(), null));
 		}
 
-        return JsonResponse::toResponse(new ApiResponse(500, $exception->getMessage(), get_class($exception)));
+        return JsonResponse::toResponse(new ApiResponse(500, $exception->getMessage(), $exception->getTrace()));
     }
 }

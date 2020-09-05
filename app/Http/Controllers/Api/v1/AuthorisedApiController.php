@@ -21,4 +21,27 @@ class AuthorisedApiController extends ApiController
 	public function getUser(): User {
 		return Auth::user();
 	}
+
+	public function getPerPage(): ?int {
+		if (!request()->has('perPage')) {
+			return null;
+		}
+
+		$perPage = request()->get('perPage');
+		$perPage = filter_var($perPage, FILTER_VALIDATE_INT);
+
+		if ($perPage === false) {
+			return null;
+		}
+
+		if ($perPage < 1) {
+			return 1;
+		}
+
+		if ($perPage > 25) {
+			return 25;
+		}
+
+		return (int) $perPage;
+	}
 }
