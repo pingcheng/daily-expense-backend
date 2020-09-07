@@ -74,6 +74,40 @@ class SubCategoryController extends AuthorisedApiController
 		]);
 	}
 
+	public function patch(Request $request, int $subCategoryId): Response {
+		$payload = $request->validate([
+			'name' => 'required|string|max:50',
+		]);
+
+		$user = $this->getUser();
+		/** @var SubCategory|null $subCategory */
+		$subCategory = $user->recordSubCategories()->where('id', $subCategoryId)->first();
+
+		if ($subCategory === null) {
+			return JsonResponse::badRequest(null, $this->subCategoryNotFound($subCategoryId));
+		}
+
+		$existed = $subCategory
+			->category
+			->subCategories()
+			->where('name', $payload['name'])
+			->where('id', '<>', $subCategoryId)
+			->exists();
+
+		if ($existed) {
+			return JsonResponse::badRequest(null, "Sub-category name {$payload['name']} is already existed");
+		}
+
+		$subCategory->update([
+			'name' => $payload['name']
+		]);
+
+		return JsonResponse::ok([
+			'id' => $subCategory->id,
+			'name' => $subCategory->name,
+		]);
+	}
+
 	public function delete(Request $request, int $subCategoryId): Response {
 		$user = $this->getUser();
 
@@ -91,5 +125,9 @@ class SubCategoryController extends AuthorisedApiController
 		$subCategory->delete();
 
 		return JsonResponse::ok(null, 'deleted');
+	}
+
+	private function subCategoryNotFound(int $id): string {
+		return "Sub-category with ID ({$id}) is not found";
 	}
 }
