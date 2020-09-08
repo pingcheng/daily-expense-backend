@@ -25,7 +25,7 @@ class JsonResponse
 		return self::toResponse(new ApiResponse(405, $message, $payload));
 	}
 
-	public static function unprocessableEntity($payload = null, string $message = 'Unprocessable entity found'): Response {
+	public static function unprocessableEntity($payload = null, string $message = 'The given data was invalid.'): Response {
 		return self::toResponse(new ApiResponse(422, $message, $payload));
 	}
 

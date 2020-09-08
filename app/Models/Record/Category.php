@@ -43,4 +43,12 @@ class Category extends Model
 		return $this->hasMany(SubCategory::class, 'category_id', 'id')
 			->where('user_id', $this->user_id);
 	}
+
+	public function outputModel(): array {
+		return [
+			'id' => $this->id,
+			'name' => $this->name,
+			'type' => $this->type
+		];
+	}
 }

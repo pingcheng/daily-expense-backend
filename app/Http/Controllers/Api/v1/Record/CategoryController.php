@@ -11,6 +11,7 @@ use App\Models\Record\Category;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends AuthorisedApiController
@@ -19,11 +20,7 @@ class CategoryController extends AuthorisedApiController
 		$user = $this->getUser();
 		$builder = $user->recordCategories()->paginate();
 
-		return JsonResponse::ok(PaginationResponse::build($builder, fn(Category $category) => [
-			'id' => $category->id,
-			'name' => $category->name,
-			'type' => $category->type
-		]));
+		return JsonResponse::ok(PaginationResponse::build($builder, fn(Category $category) => $category->outputModel()));
 	}
 
 	public function put(Request $request): Response {
@@ -52,11 +49,7 @@ class CategoryController extends AuthorisedApiController
 			'type' => (int) $payload['type']
 		]);
 
-		return JsonResponse::ok([
-			'id' => $category->id,
-			'name' => $category->name,
-			'type' => $category->type
-		]);
+		return JsonResponse::ok($category->outputModel());
 	}
 
 	/**
@@ -104,15 +97,13 @@ class CategoryController extends AuthorisedApiController
 			->exists();
 
 		if ($existed) {
-			return JsonResponse::badRequest(null, "Category name {$payload['name']} is already existed");
+			$error = new MessageBag();
+			$error->add('name', 'This name already exists');
+			return JsonResponse::unprocessableEntity($error->getMessages());
 		}
 
 		$category->update(['name' => $payload['name']]);
 
-		return JsonResponse::ok([
-			'id' => $category->id,
-			'name' => $category->name,
-			'type' => $category->type
-		]);
+		return JsonResponse::ok($category->outputModel());
 	}
 }

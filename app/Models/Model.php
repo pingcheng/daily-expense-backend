@@ -14,5 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Model extends \Illuminate\Database\Eloquent\Model
 {
-
+	public function outputModel(): array {
+		return [];
+	}
 }
