@@ -10,7 +10,6 @@ use App\Http\Response\PaginationResponse;
 use App\Models\Record\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
-use Psy\Util\Json;
 use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends AuthorisedApiController
