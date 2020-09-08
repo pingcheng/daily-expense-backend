@@ -14,6 +14,7 @@ Route::get('/records', 'Api\v1\Record\RecordsController@get');
 Route::get('/record/categories', 'Api\v1\Record\CategoryController@get');
 Route::put('/record/category', 'Api\v1\Record\CategoryController@put');
 Route::delete('/record/category/{categoryId}', 'Api\v1\Record\CategoryController@delete')->where('categoryId', '[0-9]+');
+Route::patch('/record/category/{categoryId}', 'Api\v1\Record\CategoryController@patch')->where('categoryId', '[0-9]+');
 
 Route::get('/record/category/{categoryId}/subcategories', 'Api\v1\Record\SubCategoryController@get')->where('categoryId', '[0-9]+');
 Route::put('/record/category/{categoryId}/subcategory', 'Api\v1\Record\SubCategoryController@put')->where('categoryId', '[0-9]+');

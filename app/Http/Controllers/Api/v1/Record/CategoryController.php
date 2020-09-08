@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\v1\AuthorisedApiController;
 use App\Http\Response\JsonResponse;
 use App\Http\Response\PaginationResponse;
 use App\Models\Record\Category;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,6 +59,12 @@ class CategoryController extends AuthorisedApiController
 		]);
 	}
 
+	/**
+	 * @param int $categoryId
+	 *
+	 * @return Response
+	 * @throws Exception
+	 */
 	public function delete(int $categoryId): Response {
 		$user = $this->getUser();
 
@@ -75,5 +82,37 @@ class CategoryController extends AuthorisedApiController
 		$category->delete();
 
 		return JsonResponse::ok(null, 'deleted');
+	}
+
+	public function patch(Request $request, int $categoryId): Response {
+		$payload = $request->validate([
+			'name' => 'required|string|max:50',
+		]);
+
+		$user = $this->getUser();
+		/** @var Category $category */
+		$category = $user->recordCategories()->where('id', $categoryId)->first();
+
+		if ($category === null) {
+			return JsonResponse::badRequest(null, "Category {$categoryId} is not found");
+		}
+
+		$existed = $user
+			->recordCategories()
+			->where('name', $payload['name'])
+			->where('id', '<>', $categoryId)
+			->exists();
+
+		if ($existed) {
+			return JsonResponse::badRequest(null, "Category name {$payload['name']} is already existed");
+		}
+
+		$category->update(['name' => $payload['name']]);
+
+		return JsonResponse::ok([
+			'id' => $category->id,
+			'name' => $category->name,
+			'type' => $category->type
+		]);
 	}
 }
