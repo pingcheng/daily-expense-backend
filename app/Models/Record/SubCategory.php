@@ -31,9 +31,9 @@ class SubCategory extends Model
 	];
 
 	protected $casts = [
-		'id' => 'int',
-		'user_id' => 'int',
-		'category_id' => 'int',
+		'id' => 'integer',
+		'user_id' => 'integer',
+		'category_id' => 'integer',
 		'name' => 'string',
 	];
 

@@ -87,6 +87,8 @@ class SubCategoryController extends AuthorisedApiController
 			return JsonResponse::badRequest(null, $this->subCategoryNotFound($subCategoryId));
 		}
 
+		$errors = new MessageBag();
+
 		$existed = $subCategory
 			->category
 			->subCategories()
@@ -95,7 +97,11 @@ class SubCategoryController extends AuthorisedApiController
 			->exists();
 
 		if ($existed) {
-			return JsonResponse::badRequest(null, "Sub-category name {$payload['name']} is already existed");
+			$errors->add('name', "This name already exists");
+		}
+
+		if ($errors->any()) {
+			return JsonResponse::unprocessableEntity($errors->getMessages());
 		}
 
 		$subCategory->update([
