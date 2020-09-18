@@ -21,21 +21,7 @@ class RecordsController extends AuthorisedApiController
 
 		return JsonResponse::ok(PaginationResponse::build(
 			$builder,
-			fn(Record $item) => [
-				'id' => $item->id,
-				'description' => $item->description,
-				'amount' => $item->amount,
-				'datetime' => $item->datetime,
-				'subCategory' => [
-					'id' => $item->subCategory->id ?? null,
-					'name' => $item->subCategory->name ?? null,
-				],
-				'category' => [
-					'id' => $item->subCategory->category->id ?? null,
-					'name' => $item->subCategory->category->name ?? null,
-					'type' => $item->subCategory->category->type ?? null,
-				]
-			]
+			fn(Record $item) => $item->outputModel()
 		));
 	}
 }

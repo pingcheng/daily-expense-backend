@@ -42,4 +42,23 @@ class Record extends Model
 	{
 		return $this->belongsTo(SubCategory::class, 'sub_category_id', 'id');
 	}
+
+	public function outputModel(): array
+	{
+		return [
+			'id' => $this->id,
+			'description' => $this->description,
+			'amount' => $this->amount,
+			'datetime' => $this->datetime,
+			'subCategory' => [
+				'id' => $this->subCategory->id ?? null,
+				'name' => $this->subCategory->name ?? null,
+			],
+			'category' => [
+				'id' => $this->subCategory->category->id ?? null,
+				'name' => $this->subCategory->category->name ?? null,
+				'type' => $this->subCategory->category->type ?? null,
+			]
+		];
+	}
 }
