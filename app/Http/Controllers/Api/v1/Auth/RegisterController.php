@@ -9,7 +9,7 @@ use App\Http\Response\JsonResponse;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class RegisterController extends ApiController
 {

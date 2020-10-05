@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\v1\AuthorisedApiController;
 use App\Http\Response\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class PasswordController extends AuthorisedApiController
 {

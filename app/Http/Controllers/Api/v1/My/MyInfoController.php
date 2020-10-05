@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Api\v1\My;
 use App\Http\Controllers\Api\v1\ApiController;
 use App\Http\Response\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class MyInfoController extends ApiController
 {

@@ -5,7 +5,7 @@ namespace App\Http\Response;
 
 
 use App\Models\Response\ApiResponse;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class JsonResponse
 {

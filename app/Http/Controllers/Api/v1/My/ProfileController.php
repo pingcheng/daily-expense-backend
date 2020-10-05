@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Api\v1\My;
 use App\Http\Controllers\Api\v1\AuthorisedApiController;
 use App\Http\Response\JsonResponse;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class ProfileController extends AuthorisedApiController
 {

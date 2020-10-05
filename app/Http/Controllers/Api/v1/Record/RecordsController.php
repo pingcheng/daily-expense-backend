@@ -11,7 +11,7 @@ use App\Models\Record\Record;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class RecordsController extends AuthorisedApiController
 {

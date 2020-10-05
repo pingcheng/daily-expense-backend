@@ -4,12 +4,10 @@
 namespace App\Http\Controllers\Api\v1\Auth;
 
 
-use App\Http\Controllers\Api\v1\ApiController;
 use App\Http\Controllers\Api\v1\AuthorisedApiController;
 use App\Http\Response\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class LogoutController extends AuthorisedApiController
 {

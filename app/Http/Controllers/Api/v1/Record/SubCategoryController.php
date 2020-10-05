@@ -11,7 +11,7 @@ use App\Models\Record\Category;
 use App\Models\Record\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class SubCategoryController extends AuthorisedApiController
 {

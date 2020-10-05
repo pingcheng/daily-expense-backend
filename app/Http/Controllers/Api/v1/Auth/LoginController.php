@@ -9,8 +9,8 @@ use App\Http\Response\JsonResponse;
 use App\Models\Auth\LoginCredential;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
-use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends ApiController
 {

@@ -11,8 +11,7 @@ use App\Models\Record\Category;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
-use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class CategoryController extends AuthorisedApiController
 {
