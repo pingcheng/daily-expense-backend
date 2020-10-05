@@ -6,6 +6,7 @@ namespace App\Models\Record;
 
 use App\Models\Model;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -22,6 +23,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class SubCategory extends Model
 {
+
+	use HasFactory;
+
 	protected $table = 'sub_categories';
 
 	protected $fillable = [

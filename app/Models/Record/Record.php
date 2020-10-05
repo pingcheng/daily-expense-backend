@@ -7,6 +7,7 @@ namespace App\Models\Record;
 use App\Models\Model;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -24,6 +25,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Record extends Model
 {
+
+	use HasFactory;
+
 	protected $table = 'records';
 
 	protected $casts = [

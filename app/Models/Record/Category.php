@@ -6,6 +6,7 @@ namespace App\Models\Record;
 
 use App\Models\Model;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -20,6 +21,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Category extends Model
 {
+
+	use HasFactory;
+
 	public const TYPE_EXPENSE = 0;
 	public const TYPE_INCOME = 1;
 
