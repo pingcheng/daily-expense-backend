@@ -23,6 +23,7 @@ use Laravel\Passport\HasApiTokens;
  * Class User
  * @package App
  *
+ * @property integer|null $id
  * @property Collection|Record[] $records
  * @property Collection|Record[] $recordSubCategories
  */
@@ -56,6 +57,7 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $casts = [
+    	'id' => 'integer',
         'email_verified_at' => 'datetime',
     ];
 

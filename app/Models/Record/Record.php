@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property integer $sub_category_id
  * @property string $description
  * @property integer $amount
+ * @property integer $user_id
  * @property User|null user
  * @property SubCategory|null subCategory
  * @property Carbon datetime
